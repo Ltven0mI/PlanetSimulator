@@ -9,7 +9,6 @@ function asteroid:created(args)
 
 	self.volume = math.getSphereVolume(self.radius)
 	self.mass = math.getMass(self.density, self.volume)
-	debug.log(self.volume, self.density, self.mass, self.radius)
 end
 
 function asteroid:update(dt)
@@ -24,13 +23,11 @@ function asteroid:update(dt)
 	for key, par in pairs(self.par) do
 		if par then
 			local dist = math.dist(self.pos.x, self.pos.y, par.pos.x, par.pos.y)*1000
-			--debug.log(dist/1000)
 			local dir = {x=par.pos.x - self.pos.x, y=par.pos.y - self.pos.y}
 			local mag = math.sqrt((dir.x * dir.x)+(dir.y * dir.y))
 			local g = physics.G
 			local f = g * ((self.mass * par.mass)/(dist*dist))
 			local aSelf, aPar = ((g*self.mass)/(dist*dist))*10000000000000, ((g*par.mass)/(dist*dist))*10000000000000 --THe /1000 converts it from meters per second to kilometers per second
-			debug.log(aSelf, aPar)
 			dir.x = dir.x / mag
 			dir.y = dir.y / mag
 			self.vel.x = self.vel.x + ((dir.x*aPar))*ps.speed
