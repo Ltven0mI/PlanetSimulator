@@ -9,6 +9,7 @@ ps.holdPos2 = nil
 
 ps.speed = 0.1
 ps.showTrails = false
+ps.debugMode = true
 
 ps.font = love.graphics.getFont()
 
